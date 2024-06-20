@@ -147,6 +147,8 @@ html {
 body {
   font-size: 1.6rem;
   font-family: "Gordita", sans-serif;
+  color: var(--text-color);
+  background: var(--body-bg);
 }
 
 a {
@@ -158,6 +160,18 @@ button {
   border: none;
   outline: none;
   background: transparent;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+.icon {
+  filter: var(--icon-filter);
 }
 
 .col, .row > *, .row[class*=row-cols-] > *,
@@ -1205,40 +1219,122 @@ button {
 - Cần ít hoặc nhiều hơn 7 thư mục trong 7-1 pattern thì sao?
 - Cách minify (compressed) Sass output
 */
+html.dark {
+  --text-color: #ffffff;
+  --icon-filter: brightness(0) saturate(100%) invert(100%) sepia(100%)
+      saturate(0%) hue-rotate(101deg) brightness(103%) contrast(104%);
+  --header-bg: #171c28;
+  --body-bg: #292e39;
+  --group-act-bg: #292e39;
+  --top-act-box-shadow-color: rgba(0, 0, 0, 0.2);
+  --separate-bg: #ededf6;
+  --dropdown-bg: #2f3441;
+  --dropdown-shadow-color: rgba(23, 28, 40, 0.4);
+  --dropdown-arrow-color: brightness(0) saturate(100%) invert(18%) sepia(13%)
+      saturate(864%) hue-rotate(185deg) brightness(91%) contrast(91%);
+}
+
+html {
+  --text-color: #1a162e;
+  --icon-filter: brightness(0) saturate(100%) invert(5%) sepia(20%)
+      saturate(5703%) hue-rotate(233deg) brightness(94%) contrast(92%);
+  --header-bg: #eeeeee;
+  --body-bg: #f6f6f6;
+  --group-act-bg: #fff;
+  --top-act-box-shadow-color: rgba(237, 237, 246, 0.2);
+  --separate-bg: #ededf6;
+  --dropdown-bg: #fff;
+  --dropdown-shadow-color: rgba(200, 200, 200, 0.4);
+}
+@media (max-width: 991.98px) {
+  html {
+    --header-bg: #fff;
+  }
+}
+
 .header {
-  background: #eeeeee;
+  background: var(--header-bg);
   padding: 30px 0;
+}
+@media (max-width: 991.98px) {
+  .header {
+    padding: 20px 0;
+  }
+}
+@media (max-width: 575.98px) {
+  .header {
+    padding: 16px 0;
+  }
 }
 
 .top-bar {
   display: flex;
   align-items: center;
+  position: relative;
+}
+@media (max-width: 575.98px) {
+  .top-bar {
+    justify-content: space-between;
+  }
+}
+.top-bar__more {
+  display: none;
+}
+@media (max-width: 991.98px) {
+  .top-bar__more {
+    display: block;
+    cursor: pointer;
+  }
 }
 
 .navbar {
   margin-left: 144px;
   margin-right: auto;
 }
+@media (max-width: 991.98px) {
+  .navbar {
+    display: none;
+  }
+}
+@media (max-width: 1199.98px) {
+  .navbar {
+    margin-left: 50px;
+  }
+}
 .navbar__list {
   display: flex;
   align-items: center;
-  column-gap: 30px;
 }
 .navbar__link {
   display: flex;
   align-items: center;
+  padding: 0 15px;
   column-gap: 6px;
-  color: #1a162e;
+  height: 50px;
   font-size: 1.5rem;
   font-weight: 500;
   line-height: 1.46;
 }
+.navbar__item:hover .dropdown {
+  display: block;
+}
+.navbar__item:first-child a {
+  padding-left: 0;
+}
+.navbar__item:last-child a {
+  padding-right: 0;
+}
 
 .top-act {
-  margin-left: 310px;
+  margin-left: auto;
   display: flex;
   align-items: center;
   column-gap: 20px;
+}
+@media (max-width: 575.98px) {
+  .top-act {
+    margin-left: 0;
+  }
 }
 .top-act__group {
   display: flex;
@@ -1247,8 +1343,13 @@ button {
   min-width: 50px;
   height: 50px;
   border-radius: 8px;
-  background: #fff;
-  box-shadow: 0px 20px 60px 10px rgba(237, 237, 246, 0.2);
+  background: var(--group-act-bg);
+  box-shadow: 0px 20px 60px 10px var(--top-act-box-shadow-color);
+}
+@media (max-width: 767.98px) {
+  .top-act__group {
+    display: none;
+  }
 }
 .top-act__btn {
   display: flex;
@@ -1256,12 +1357,17 @@ button {
   justify-content: center;
   column-gap: 10px;
   padding: 13px 20px;
+  cursor: pointer;
+}
+@media (max-width: 991.98px) {
+  .top-act__group:nth-child(1) {
+    display: none;
+  }
 }
 .top-act__group:nth-child(1) .top-act__btn {
   padding: 13px;
 }
 .top-act__title {
-  color: #1a162e;
   font-size: 1.5rem;
   font-weight: 500;
   line-height: 1.46;
@@ -1269,13 +1375,14 @@ button {
 .top-act__separate {
   width: 1px;
   height: 30px;
-  background: #ededf6;
+  background: var(--separate-bg);
 }
 .top-act__avatar {
   display: block;
   width: 50px;
   height: 50px;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .logo {
@@ -1283,11 +1390,54 @@ button {
   align-items: center;
   column-gap: 14px;
 }
+@media (max-width: 991.98px) {
+  .logo {
+    column-gap: 10px;
+    margin-left: 40px;
+  }
+}
+@media (max-width: 575.98px) {
+  .logo {
+    margin-left: 0;
+  }
+}
 .logo__title {
-  color: #1a162e;
   font-size: 2.2rem;
   font-weight: 700;
   line-height: 1.45;
+}
+@media (max-width: 991.98px) {
+  .logo__title {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 991.98px) {
+  .logo__img {
+    width: 24px;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  left: 0;
+  padding-top: 54px;
+  display: none;
+}
+.dropdown__inner {
+  position: relative;
+  width: 1240px;
+  padding: 30px;
+  border-radius: 20px;
+  background: var(--dropdown-bg);
+  box-shadow: 0px 40px 90px 20px var(--dropdown-shadow-color);
+}
+.dropdown__inner::before {
+  content: url("../icons/dropdown-arrow.svg");
+  position: absolute;
+  top: -13px;
+  left: var(--arrow-left-pos);
+  translate: -50%;
+  filter: var(--dropdown-arrow-color);
 }
 
 /*# sourceMappingURL=main.css.map */

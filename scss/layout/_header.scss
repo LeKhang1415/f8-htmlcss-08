@@ -1,34 +1,73 @@
+@use "../abstracts";
+
 .header {
-    background: #eeeeee;
+    background: var(--header-bg);
     padding: 30px 0;
+    @include abstracts.breakpoint(lg) {
+        padding: 20px 0;
+    }
+    @include abstracts.breakpoint(sm) {
+        padding: 16px 0;
+    }
 }
 .top-bar {
     display: flex;
     align-items: center;
+    position: relative;
+    @include abstracts.breakpoint(sm) {
+        justify-content: space-between;
+    }
+    &__more {
+        display: none;
+        @include abstracts.breakpoint(lg) {
+            display: block;
+            cursor: pointer;
+        }
+    }
 }
 .navbar {
     margin-left: 144px;
     margin-right: auto;
+    @include abstracts.breakpoint(lg) {
+        display: none;
+    }
+    @include abstracts.breakpoint(xl) {
+        margin-left: 50px;
+    }
     &__list {
         display: flex;
         align-items: center;
-        column-gap: 30px;
     }
     &__link {
         display: flex;
         align-items: center;
+        padding: 0 15px;
         column-gap: 6px;
-        color: #1a162e;
+        height: 50px;
         font-size: 1.5rem;
         font-weight: 500;
         line-height: 1.46;
     }
+    &__item {
+        &:hover .dropdown {
+            display: block;
+        }
+        &:first-child a {
+            padding-left: 0;
+        }
+        &:last-child a {
+            padding-right: 0;
+        }
+    }
 }
 .top-act {
-    margin-left: 310px;
+    margin-left: auto;
     display: flex;
     align-items: center;
     column-gap: 20px;
+    @include abstracts.breakpoint(sm) {
+        margin-left: 0;
+    }
     &__group {
         display: flex;
         align-items: center;
@@ -38,8 +77,12 @@
         height: 50px;
 
         border-radius: 8px;
-        background: #fff;
-        box-shadow: 0px 20px 60px 10px rgba(237, 237, 246, 0.2);
+        background: var(--group-act-bg);
+        box-shadow: 0px 20px 60px 10px var(--top-act-box-shadow-color);
+
+        @include abstracts.breakpoint(md) {
+            display: none;
+        }
     }
     &__btn {
         display: flex;
@@ -47,12 +90,17 @@
         justify-content: center;
         column-gap: 10px;
         padding: 13px 20px;
+        cursor: pointer;
+    }
+    &__group:nth-child(1) {
+        @include abstracts.breakpoint(lg) {
+            display: none;
+        }
     }
     &__group:nth-child(1) &__btn {
         padding: 13px;
     }
     &__title {
-        color: #1a162e;
         font-size: 1.5rem;
         font-weight: 500;
         line-height: 1.46;
@@ -60,12 +108,13 @@
     &__separate {
         width: 1px;
         height: 30px;
-        background: #ededf6;
+        background: var(--separate-bg);
     }
     &__avatar {
         display: block;
         width: 50px;
         height: 50px;
         border-radius: 8px;
+        cursor: pointer;
     }
 }
