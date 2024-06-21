@@ -14,7 +14,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    @include abstracts.breakpoint(sm) {
+    @include abstracts.breakpoint(md) {
         justify-content: space-between;
     }
     &__more {
@@ -26,8 +26,7 @@
     }
 }
 .navbar {
-    margin-left: 144px;
-    margin-right: auto;
+    margin-left: 129px;
     @include abstracts.breakpoint(lg) {
         display: none;
     }
@@ -52,12 +51,6 @@
         &:hover .dropdown {
             display: block;
         }
-        &:first-child a {
-            padding-left: 0;
-        }
-        &:last-child a {
-            padding-right: 0;
-        }
     }
 }
 .top-act {
@@ -65,7 +58,7 @@
     display: flex;
     align-items: center;
     column-gap: 20px;
-    @include abstracts.breakpoint(sm) {
+    @include abstracts.breakpoint(md) {
         margin-left: 0;
     }
     &__group {

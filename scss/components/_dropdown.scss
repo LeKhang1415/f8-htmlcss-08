@@ -1,11 +1,11 @@
 .dropdown {
     position: absolute;
     left: 0;
+    width: min(1240px, 100%);
     padding-top: 54px;
     display: none;
     &__inner {
         position: relative;
-        width: 1240px;
         padding: 30px;
         border-radius: 20px;
         background: var(--dropdown-bg);
@@ -18,5 +18,88 @@
             translate: -50%;
             filter: var(--dropdown-arrow-color);
         }
+    }
+}
+.top-menu {
+    --main-column-width: 292px;
+    position: relative;
+    &__main {
+        width: var(--main-column-width);
+        height: calc(min(582px, 100vh - 158px) - 46px);
+        border-right: 1px solid var(--top-menu-border-color);
+        overflow: hidden;
+        overflow-y: auto;
+    }
+}
+.menu-column {
+    display: flex;
+    column-gap: 14px;
+    &__icon {
+        position: relative;
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+    }
+    & + .menu-column {
+        margin-top: 22px;
+    }
+    &__content {
+        flex: 1;
+    }
+    &__icon-1,
+    &__icon-2 {
+        object-fit: contain;
+    }
+    &__icon-1 {
+        width: 30px;
+        height: 30px;
+    }
+    &__icon-2 {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        right: 0;
+        bottom: 0;
+        filter: var(--menu-column-icon-color);
+    }
+    &__heading {
+        margin-top: 5px;
+        font-size: 1.6rem;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+    &__list {
+        margin-top: 19px;
+    }
+    &__item {
+        &:hover .sub-menu {
+            display: grid;
+        }
+    }
+    &__item:hover > &__link {
+        font-weight: 500;
+        color: #0071dc;
+    }
+    &__link {
+        display: block;
+        padding: 7px 0;
+        font-size: 1.4rem;
+        line-height: 1.42;
+    }
+}
+.sub-menu {
+    position: absolute;
+    padding-left: 30px;
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 30px;
+    inset: 0 0 0 var(--main-column-width);
+    overflow-y: auto;
+    &--not-main {
+        position: initial;
+        inset: initial;
+        display: grid;
+        height: calc(min(582px, 100vh - 158px) - 46px);
+        grid-template-columns: repeat(4, 1fr);
     }
 }
